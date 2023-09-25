@@ -1,0 +1,19 @@
+﻿生成启动时间为 2023/9/25 21:18:39。
+     1>项目“C:\Users\81228\Documents\Visual Studio 2015\Projects\Simplest FFmpeg Player\Simplest FFmpeg Player\Simplest FFmpeg Player.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Iinclude /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\Simplest FFmpeg Player.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt "Simplest FFmpeg Player.cpp"
+         Simplest FFmpeg Player.cpp
+     1>c:\users\81228\documents\visual studio 2015\projects\simplest ffmpeg player\simplest ffmpeg player\simplest ffmpeg player.cpp(142): warning C4018: “<”: 有符号/无符号不匹配
+     1>c:\users\81228\documents\visual studio 2015\projects\simplest ffmpeg player\simplest ffmpeg player\simplest ffmpeg player.cpp(178): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int64_t'
+         c:\users\81228\documents\visual studio 2015\projects\simplest ffmpeg player\simplest ffmpeg player\simplest ffmpeg player.cpp(178): note: consider using '%lld' in the format string
+         c:\users\81228\documents\visual studio 2015\projects\simplest ffmpeg player\simplest ffmpeg player\simplest ffmpeg player.cpp(178): note: consider using '%I64d' in the format string
+     1>c:\users\81228\documents\visual studio 2015\projects\simplest ffmpeg player\simplest ffmpeg player\simplest ffmpeg player.cpp(108): warning C4101: “y_size”: 未引用的局部变量
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\81228\Documents\Visual Studio 2015\Projects\Simplest FFmpeg Player\Debug\Simplest FFmpeg Player.exe" /INCREMENTAL /NOLOGO /LIBPATH:lib avcodec.lib avformat.lib avutil.lib avdevice.lib avfilter.lib postproc.lib swresample.lib swscale.lib SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\81228\Documents\Visual Studio 2015\Projects\Simplest FFmpeg Player\Debug\Simplest FFmpeg Player.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\81228\Documents\Visual Studio 2015\Projects\Simplest FFmpeg Player\Debug\Simplest FFmpeg Player.lib" /MACHINE:X86 "Debug\Simplest FFmpeg Player.obj"
+         Debug\stdafx.obj
+         Simplest FFmpeg Player.vcxproj -> C:\Users\81228\Documents\Visual Studio 2015\Projects\Simplest FFmpeg Player\Debug\Simplest FFmpeg Player.exe
+     1>已完成生成项目“C:\Users\81228\Documents\Visual Studio 2015\Projects\Simplest FFmpeg Player\Simplest FFmpeg Player\Simplest FFmpeg Player.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:00.58
