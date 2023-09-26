@@ -1,28 +1,28 @@
-// Simplest FFmpeg Player.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// Simplest FFmpeg Player.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 /**
-* ×î¼òµ¥µÄ»ùÓÚFFmpegµÄÊÓÆµ²¥·ÅÆ÷2(SDLÉı¼¶°æ)
+* æœ€ç®€å•çš„åŸºäºFFmpegçš„è§†é¢‘æ’­æ”¾å™¨2(SDLå‡çº§ç‰ˆ)
 * Simplest FFmpeg Player 2(SDL Update)
 *
-* Ô­³ÌĞò£º
-* À×Ïöæè Lei Xiaohua
+* åŸç¨‹åºï¼š
+* é›·éœ„éª… Lei Xiaohua
 * leixiaohua1020@126.com
-* ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+* ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
 * Communication University of China / Digital TV Technology
 * http://blog.csdn.net/leixiaohua1020
 *
-* ĞŞ¸Ä£º
-* ÁõÎÄ³¿ Liu Wenchen
+* ä¿®æ”¹ï¼š
+* åˆ˜æ–‡æ™¨ Liu Wenchen
 * 812288728@qq.com
-* µç×Ó¿Æ¼¼´óÑ§/µç×ÓĞÅÏ¢
+* ç”µå­ç§‘æŠ€å¤§å­¦/ç”µå­ä¿¡æ¯
 * University of Electronic Science and Technology of China / Electronic and Information Science
 * https://blog.csdn.net/ProgramNovice
 *
-* ±¾³ÌĞòÊµÏÖÁËÊÓÆµÎÄ¼şµÄ½âÂëºÍÏÔÊ¾(Ö§³ÖHEVC£¬H.264£¬MPEG2µÈ)¡£
-* ÊÇ×î¼òµ¥µÄFFmpegÊÓÆµ½âÂë·½ÃæµÄ½Ì³Ì¡£
-* Í¨¹ıÑ§Ï°±¾Àı×Ó¿ÉÒÔÁË½âFFmpegµÄ½âÂëÁ÷³Ì¡£
-* ±¾°æ±¾ÖĞÊ¹ÓÃSDLÏûÏ¢»úÖÆË¢ĞÂÊÓÆµ»­Ãæ¡£
+* æœ¬ç¨‹åºå®ç°äº†è§†é¢‘æ–‡ä»¶çš„è§£ç å’Œæ˜¾ç¤º(æ”¯æŒHEVCï¼ŒH.264ï¼ŒMPEG2ç­‰)ã€‚
+* æ˜¯æœ€ç®€å•çš„FFmpegè§†é¢‘è§£ç æ–¹é¢çš„æ•™ç¨‹ã€‚
+* é€šè¿‡å­¦ä¹ æœ¬ä¾‹å­å¯ä»¥äº†è§£FFmpegçš„è§£ç æµç¨‹ã€‚
+* æœ¬ç‰ˆæœ¬ä¸­ä½¿ç”¨SDLæ¶ˆæ¯æœºåˆ¶åˆ·æ–°è§†é¢‘ç”»é¢ã€‚
 *
 * This software is a simplest video player based on FFmpeg.
 * Suitable for beginner of FFmpeg.
@@ -44,34 +44,34 @@ extern "C"
 #include "SDL2/SDL.h"
 };
 
-// ±¨´í£º
-// LNK2019 ÎŞ·¨½âÎöµÄÍâ²¿·ûºÅ __imp__fprintf£¬¸Ã·ûºÅÔÚº¯Êı _ShowError ÖĞ±»ÒıÓÃ
-// LNK2019 ÎŞ·¨½âÎöµÄÍâ²¿·ûºÅ __imp____iob_func£¬¸Ã·ûºÅÔÚº¯Êı _ShowError ÖĞ±»ÒıÓÃ
+// æŠ¥é”™ï¼š
+// LNK2019 æ— æ³•è§£æçš„å¤–éƒ¨ç¬¦å· __imp__fprintfï¼Œè¯¥ç¬¦å·åœ¨å‡½æ•° _ShowError ä¸­è¢«å¼•ç”¨
+// LNK2019 æ— æ³•è§£æçš„å¤–éƒ¨ç¬¦å· __imp____iob_funcï¼Œè¯¥ç¬¦å·åœ¨å‡½æ•° _ShowError ä¸­è¢«å¼•ç”¨
 
-// ½â¾ö°ì·¨£º
-// °üº¬¿âµÄ±àÒëÆ÷°æ±¾µÍÓÚµ±Ç°±àÒë°æ±¾£¬ĞèÒª½«°üº¬¿âÔ´ÂëÓÃvs2017ÖØĞÂ±àÒë£¬ÓÉÓÚÃ»ÓĞ°üº¬¿âµÄÔ´Âë£¬´ËÂ·²»Í¨¡£
-// È»ºó²éµ½ËµÊÇstdin, stderr, stdout Õâ¼¸¸öº¯Êıvs2015ºÍÒÔÇ°µÄ¶¨ÒåµÃ²»Ò»Ñù£¬ËùÒÔ±¨´í¡£
-// ½â¾ö·½·¨ÄØ£¬¾ÍÊÇÊ¹ÓÃ{ *stdin,*stdout,*stderr }Êı×é×Ô¼º¶¨Òå__iob_func()
+// è§£å†³åŠæ³•ï¼š
+// åŒ…å«åº“çš„ç¼–è¯‘å™¨ç‰ˆæœ¬ä½äºå½“å‰ç¼–è¯‘ç‰ˆæœ¬ï¼Œéœ€è¦å°†åŒ…å«åº“æºç ç”¨vs2017é‡æ–°ç¼–è¯‘ï¼Œç”±äºæ²¡æœ‰åŒ…å«åº“çš„æºç ï¼Œæ­¤è·¯ä¸é€šã€‚
+// ç„¶åæŸ¥åˆ°è¯´æ˜¯stdin, stderr, stdout è¿™å‡ ä¸ªå‡½æ•°vs2015å’Œä»¥å‰çš„å®šä¹‰å¾—ä¸ä¸€æ ·ï¼Œæ‰€ä»¥æŠ¥é”™ã€‚
+// è§£å†³æ–¹æ³•å‘¢ï¼Œå°±æ˜¯ä½¿ç”¨{ *stdin,*stdout,*stderr }æ•°ç»„è‡ªå·±å®šä¹‰__iob_func()
 #pragma comment(lib,"legacy_stdio_definitions.lib")
 extern "C"
 {
 	FILE __iob_func[3] = { *stdin,*stdout,*stderr };
 }
 
-// ×Ô¶¨ÒåÏûÏ¢ÀàĞÍ
+// è‡ªå®šä¹‰æ¶ˆæ¯ç±»å‹
 #define REFRESH_EVENT  (SDL_USEREVENT + 1) // Refresh Event
 #define BREAK_EVENT  (SDL_USEREVENT + 2) // Break
 
-// Ïß³Ì±êÖ¾Î»
-int thread_exit = 0;// ÍË³ö±êÖ¾£¬µÈÓÚ1ÔòÍË³ö
-int thread_pause = 0;// ÔİÍ£±êÖ¾£¬µÈÓÚ1ÔòÔİÍ£
+// çº¿ç¨‹æ ‡å¿—ä½
+int thread_exit = 0;// é€€å‡ºæ ‡å¿—ï¼Œç­‰äº1åˆ™é€€å‡º
+int thread_pause = 0;// æš‚åœæ ‡å¿—ï¼Œç­‰äº1åˆ™æš‚åœ
 
-// ÊÓÆµ²¥·ÅÏà¹Ø²ÎÊı
+// è§†é¢‘æ’­æ”¾ç›¸å…³å‚æ•°
 int delay_time = 40;
 
-bool video_gray = false;// ÊÇ·ñÏÔÊ¾ºÚ°×Í¼Ïñ
+bool video_gray = false;// æ˜¯å¦æ˜¾ç¤ºé»‘ç™½å›¾åƒ
 
-// »­ÃæË¢ĞÂÏß³Ì
+// ç”»é¢åˆ·æ–°çº¿ç¨‹
 int refresh_video(void *opaque)
 {
 	thread_exit = 0;
@@ -81,18 +81,18 @@ int refresh_video(void *opaque)
 		{
 			SDL_Event event;
 			event.type = REFRESH_EVENT;
-			// ÏòÖ÷Ïß³Ì·¢ËÍË¢ĞÂÊÂ¼ş
+			// å‘ä¸»çº¿ç¨‹å‘é€åˆ·æ–°äº‹ä»¶
 			SDL_PushEvent(&event);
 		}
-		// ¹¤¾ßº¯Êı£¬ÓÃÓÚÑÓÊ±
+		// å·¥å…·å‡½æ•°ï¼Œç”¨äºå»¶æ—¶
 		SDL_Delay(delay_time);
 	}
 	thread_exit = 0;
 	thread_pause = 0;
-	// ĞèÒª½áÊø²¥·Å
+	// éœ€è¦ç»“æŸæ’­æ”¾
 	SDL_Event event;
 	event.type = BREAK_EVENT;
-	// ÏòÖ÷Ïß³Ì·¢ËÍÍË³öÑ­»·ÊÂ¼ş
+	// å‘ä¸»çº¿ç¨‹å‘é€é€€å‡ºå¾ªç¯äº‹ä»¶
 	SDL_PushEvent(&event);
 
 	return 0;
@@ -111,30 +111,30 @@ int main(int argc, char* argv[])
 	int ret, got_picture;
 	//------------ SDL ----------------
 	int screen_w, screen_h;
-	SDL_Window *screen;// ´°¿Ú
-	SDL_Renderer* sdlRenderer;// äÖÈ¾Æ÷
-	SDL_Texture* sdlTexture;// ÎÆÀí
-	SDL_Rect sdlRect;// äÖÈ¾ÏÔÊ¾Ãæ»ı
-	SDL_Thread *refresh_thread;// »­ÃæË¢ĞÂÏß³Ì
-	SDL_Event event;// Ö÷Ïß³ÌÊ¹ÓÃµÄÊÂ¼ş
+	SDL_Window *screen;// çª—å£
+	SDL_Renderer* sdlRenderer;// æ¸²æŸ“å™¨
+	SDL_Texture* sdlTexture;// çº¹ç†
+	SDL_Rect sdlRect;// æ¸²æŸ“æ˜¾ç¤ºé¢ç§¯
+	SDL_Thread *refresh_thread;// ç”»é¢åˆ·æ–°çº¿ç¨‹
+	SDL_Event event;// ä¸»çº¿ç¨‹ä½¿ç”¨çš„äº‹ä»¶
 
 	struct SwsContext *img_convert_ctx;
-	// ÊäÈëÎÄ¼şÂ·¾¶
-	char filepath[] = "ŒÅË¿ÄĞÊ¿.mov";
+	// è¾“å…¥æ–‡ä»¶è·¯å¾„
+	char filepath[] = "å±Œä¸ç”·å£«.mov";
 
 	int frame_cnt;
 
 	av_register_all();
 	avformat_network_init();
-	// ÉêÇëavFormatContext¿Õ¼ä£¬¼ÇµÃÒªÊÍ·Å
+	// ç”³è¯·avFormatContextç©ºé—´ï¼Œè®°å¾—è¦é‡Šæ”¾
 	pFormatCtx = avformat_alloc_context();
-	// ´ò¿ªÃ½ÌåÎÄ¼ş
+	// æ‰“å¼€åª’ä½“æ–‡ä»¶
 	if (avformat_open_input(&pFormatCtx, filepath, NULL, NULL) != 0)
 	{
 		printf("Couldn't open input stream.\n");
 		return -1;
 	}
-	// ¶ÁÈ¡Ã½ÌåÎÄ¼şĞÅÏ¢£¬¸øpFormatCtx¸³Öµ
+	// è¯»å–åª’ä½“æ–‡ä»¶ä¿¡æ¯ï¼Œç»™pFormatCtxèµ‹å€¼
 	if (avformat_find_stream_info(pFormatCtx, NULL) < 0)
 	{
 		printf("Couldn't find stream information.\n");
@@ -155,14 +155,14 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 	pCodecCtx = pFormatCtx->streams[videoindex]->codec;
-	// ¸ù¾İÊÓÆµÁ÷ĞÅÏ¢µÄcodec_idÕÒµ½¶ÔÓ¦µÄ½âÂëÆ÷
+	// æ ¹æ®è§†é¢‘æµä¿¡æ¯çš„codec_idæ‰¾åˆ°å¯¹åº”çš„è§£ç å™¨
 	pCodec = avcodec_find_decoder(pCodecCtx->codec_id);
 	if (pCodec == NULL)
 	{
 		printf("Codec not found.\n");
 		return -1;
 	}
-	// Ê¹ÓÃ¸ø¶¨µÄpCodec³õÊ¼»¯pCodecCtx
+	// ä½¿ç”¨ç»™å®šçš„pCodecåˆå§‹åŒ–pCodecCtx
 	if (avcodec_open2(pCodecCtx, pCodec, NULL) < 0)
 	{
 		printf("Could not open codec.\n");
@@ -170,23 +170,23 @@ int main(int argc, char* argv[])
 	}
 
 	/*
-	* ÔÚ´Ë´¦Ìí¼ÓÊä³öÊÓÆµĞÅÏ¢µÄ´úÂë
-	* È¡×ÔÓÚpFormatCtx£¬Ê¹ÓÃfprintf()
+	* åœ¨æ­¤å¤„æ·»åŠ è¾“å‡ºè§†é¢‘ä¿¡æ¯çš„ä»£ç 
+	* å–è‡ªäºpFormatCtxï¼Œä½¿ç”¨fprintf()
 	*/
 	FILE *fp_txt = fopen("info.txt", "wb+");
 
-	fprintf(fp_txt, "·â×°¸ñÊ½£º%s\n", pFormatCtx->iformat->long_name);
-	fprintf(fp_txt, "±ÈÌØÂÊ£º%d\n", pFormatCtx->bit_rate);
-	fprintf(fp_txt, "ÊÓÆµÊ±³¤£º%d\n", pFormatCtx->duration);
-	fprintf(fp_txt, "ÊÓÆµ±àÂë·½Ê½£º%s\n", pFormatCtx->streams[videoindex]->codec->codec->long_name);
-	fprintf(fp_txt, "ÊÓÆµ·Ö±æÂÊ£º%d * %d\n", pFormatCtx->streams[videoindex]->codec->width, pFormatCtx->streams[videoindex]->codec->height);
+	fprintf(fp_txt, "å°è£…æ ¼å¼ï¼š%s\n", pFormatCtx->iformat->long_name);
+	fprintf(fp_txt, "æ¯”ç‰¹ç‡ï¼š%d\n", pFormatCtx->bit_rate);
+	fprintf(fp_txt, "è§†é¢‘æ—¶é•¿ï¼š%d\n", pFormatCtx->duration);
+	fprintf(fp_txt, "è§†é¢‘ç¼–ç æ–¹å¼ï¼š%s\n", pFormatCtx->streams[videoindex]->codec->codec->long_name);
+	fprintf(fp_txt, "è§†é¢‘åˆ†è¾¨ç‡ï¼š%d * %d\n", pFormatCtx->streams[videoindex]->codec->width, pFormatCtx->streams[videoindex]->codec->height);
 
-	// ÔÚavcodec_receive_frame()º¯Êı×÷Îª²ÎÊı£¬»ñÈ¡µ½frame
-	// »ñÈ¡µ½µÄframeÓĞĞ©¿ÉÄÜÊÇ´íÎóµÄÒª¹ıÂËµô£¬·ñÔòÏàÓ¦Ö¡¿ÉÄÜ³öÏÖÂÌÆÁ
+	// åœ¨avcodec_receive_frame()å‡½æ•°ä½œä¸ºå‚æ•°ï¼Œè·å–åˆ°frame
+	// è·å–åˆ°çš„frameæœ‰äº›å¯èƒ½æ˜¯é”™è¯¯çš„è¦è¿‡æ»¤æ‰ï¼Œå¦åˆ™ç›¸åº”å¸§å¯èƒ½å‡ºç°ç»¿å±
 	pFrame = av_frame_alloc();
-	//×÷ÎªyuvÊä³öµÄframe³ĞÔØÕß£¬»á½øĞĞËõ·ÅºÍ¹ıÂË³ö´íµÄÖ¡£¬YUVÏàÓ¦µÄÊı¾İÒ²ÊÇ´Ó¸Ã¶ÔÏóÖĞ¶ÁÈ¡
+	//ä½œä¸ºyuvè¾“å‡ºçš„frameæ‰¿è½½è€…ï¼Œä¼šè¿›è¡Œç¼©æ”¾å’Œè¿‡æ»¤å‡ºé”™çš„å¸§ï¼ŒYUVç›¸åº”çš„æ•°æ®ä¹Ÿæ˜¯ä»è¯¥å¯¹è±¡ä¸­è¯»å–
 	pFrameYUV = av_frame_alloc();
-	// ÓÃÓÚäÖÈ¾µÄÊı¾İ£¬ÇÒ¸ñÊ½ÎªYUV420P
+	// ç”¨äºæ¸²æŸ“çš„æ•°æ®ï¼Œä¸”æ ¼å¼ä¸ºYUV420P
 	out_buffer = (uint8_t *)av_malloc(avpicture_get_size(PIX_FMT_YUV420P, pCodecCtx->width, pCodecCtx->height));
 	avpicture_fill((AVPicture *)pFrameYUV, out_buffer, PIX_FMT_YUV420P, pCodecCtx->width, pCodecCtx->height);
 	packet = (AVPacket *)av_malloc(sizeof(AVPacket));
@@ -194,15 +194,15 @@ int main(int argc, char* argv[])
 	printf("--------------- File Information ----------------\n");
 	av_dump_format(pFormatCtx, 0, filepath, 0);
 	printf("-------------------------------------------------\n");
-	// ÓÉÓÚ½âÂë³öÀ´µÄÖ¡¸ñÊ½²»Ò»¶¨ÊÇYUV420PµÄ,ÔÚäÖÈ¾Ö®Ç°ĞèÒª½øĞĞ¸ñÊ½×ª»»
+	// ç”±äºè§£ç å‡ºæ¥çš„å¸§æ ¼å¼ä¸ä¸€å®šæ˜¯YUV420Pçš„,åœ¨æ¸²æŸ“ä¹‹å‰éœ€è¦è¿›è¡Œæ ¼å¼è½¬æ¢
 	img_convert_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
 		pCodecCtx->width, pCodecCtx->height, PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
 
-	// Ö¡¼ÆÊıÆ÷
+	// å¸§è®¡æ•°å™¨
 	frame_cnt = 0;
 
 	// ---------------------- SDL ----------------------
-	// ³õÊ¼»¯SDLÏµÍ³
+	// åˆå§‹åŒ–SDLç³»ç»Ÿ
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER))
 	{
 		printf("Couldn't initialize SDL - %s\n", SDL_GetError());
@@ -211,34 +211,34 @@ int main(int argc, char* argv[])
 	// SDL 2.0 Support for multiple windows
 	screen_w = pCodecCtx->width;
 	screen_h = pCodecCtx->height;
-	// ÊÓÆµÏñËØµÄ¿íºÍ¸ß
+	// è§†é¢‘åƒç´ çš„å®½å’Œé«˜
 	const int pixel_w = screen_w;
 	const int pixel_h = screen_h;
-	// ´´½¨´°¿ÚSDL_Window
-	screen = SDL_CreateWindow("Simplest Video Play SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	// åˆ›å»ºçª—å£SDL_Window
+	screen = SDL_CreateWindow("Simplest FFmpeg Player", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		screen_w, screen_h, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	if (!screen)
 	{
 		printf("SDL: Couldn't create window - exiting:%s\n", SDL_GetError());
 		return -1;
 	}
-	// ´´½¨äÖÈ¾Æ÷SDL_Renderer
+	// åˆ›å»ºæ¸²æŸ“å™¨SDL_Renderer
 	sdlRenderer = SDL_CreateRenderer(screen, -1, 0);
 
 	Uint32 pixformat = SDL_PIXELFORMAT_IYUV;
 	// IYUV: Y + U + V  (3 planes)
 	// YV12: Y + V + U  (3 planes)
-	// ´´½¨ÎÆÀíSDL_Texture
+	// åˆ›å»ºçº¹ç†SDL_Texture
 	sdlTexture = SDL_CreateTexture(sdlRenderer, pixformat, SDL_TEXTUREACCESS_STREAMING, pCodecCtx->width, pCodecCtx->height);
 
-	// ´´½¨»­ÃæË¢ĞÂÏß³Ì
+	// åˆ›å»ºç”»é¢åˆ·æ–°çº¿ç¨‹
 	refresh_thread = SDL_CreateThread(refresh_video, NULL, NULL);
 	// ---------------------- SDL End ----------------------
-	// ¿ªÊ¼Ò»Ö¡Ò»Ö¡¶ÁÈ¡
+	// å¼€å§‹ä¸€å¸§ä¸€å¸§è¯»å–
 	while (1)
 	{
 		// Wait
-		SDL_WaitEvent(&event);// ´ÓÊÂ¼ş¶ÓÁĞÖĞÈ¡ÊÂ¼ş
+		SDL_WaitEvent(&event);// ä»äº‹ä»¶é˜Ÿåˆ—ä¸­å–äº‹ä»¶
 		if (event.type == REFRESH_EVENT)
 		{
 			while (1)
@@ -253,8 +253,8 @@ int main(int argc, char* argv[])
 				}
 			}
 
-			// Êä³öÃ¿Ò»¸ö½âÂëÇ°ÊÓÆµÖ¡²ÎÊı£ºÖ¡´óĞ¡
-			fprintf(fp_txt, "Ö¡%d´óĞ¡£º%d\n", frame_cnt, packet->size);
+			// è¾“å‡ºæ¯ä¸€ä¸ªè§£ç å‰è§†é¢‘å¸§å‚æ•°ï¼šå¸§å¤§å°
+			fprintf(fp_txt, "å¸§%då¤§å°ï¼š%d\n", frame_cnt, packet->size);
 
 			ret = avcodec_decode_video2(pCodecCtx, pFrame, &got_picture, packet);
 			if (ret < 0)
@@ -264,12 +264,12 @@ int main(int argc, char* argv[])
 			}
 			if (got_picture)
 			{
-				// ¸ñÊ½×ª»»£¬½âÂëºóµÄÊı¾İ¾­¹ısws_scale()º¯Êı´¦Àí£¬È¥³ıÎŞĞ§ÏñËØ
+				// æ ¼å¼è½¬æ¢ï¼Œè§£ç åçš„æ•°æ®ç»è¿‡sws_scale()å‡½æ•°å¤„ç†ï¼Œå»é™¤æ— æ•ˆåƒç´ 
 				sws_scale(img_convert_ctx, (const uint8_t* const*)pFrame->data, pFrame->linesize, 0, pCodecCtx->height,
 					pFrameYUV->data, pFrameYUV->linesize);
 				printf("Decoded frame index: %d\n", frame_cnt);
 
-				// Êä³öÃ¿Ò»¸ö½âÂëºóÊÓÆµÖ¡²ÎÊı£ºÖ¡ÀàĞÍ
+				// è¾“å‡ºæ¯ä¸€ä¸ªè§£ç åè§†é¢‘å¸§å‚æ•°ï¼šå¸§ç±»å‹
 				char pict_type_str[10];
 				switch (pFrame->pict_type)
 				{
@@ -300,18 +300,18 @@ int main(int argc, char* argv[])
 				default:
 					break;
 				}
-				fprintf(fp_txt, "Ö¡%dÀàĞÍ£º%s\n", frame_cnt, pict_type_str);
+				fprintf(fp_txt, "å¸§%dç±»å‹ï¼š%s\n", frame_cnt, pict_type_str);
 
-				// ÈôÑ¡ÔñÏÔÊ¾ºÚ°×Í¼Ïñ£¬Ôò½«bufferµÄU¡¢VÊı¾İÉèÖÃÎª128
+				// è‹¥é€‰æ‹©æ˜¾ç¤ºé»‘ç™½å›¾åƒï¼Œåˆ™å°†bufferçš„Uã€Væ•°æ®è®¾ç½®ä¸º128
 				if (video_gray == true)
 				{
-					// U¡¢VÊÇÍ¼ÏñÖĞµÄ¾­¹ıÆ«ÖÃ´¦ÀíµÄÉ«¶È·ÖÁ¿
-					// ÔÚÆ«ÖÃ´¦ÀíÇ°£¬ËüµÄÈ¡Öµ·¶Î§ÊÇ-128-127£¬ÕâÊ±£¬°ÑUºÍVÊı¾İĞŞ¸ÄÎª0´ú±íÎŞÉ«
-					// ÔÚÆ«ÖÃ´¦Àíºó£¬ËüµÄÈ¡Öµ·¶Î§±ä³ÉÁË0-255£¬ËùÒÔÕâÊ±ºòĞèÒªÈ¡ÖĞ¼äÖµ£¬¼´128
+					// Uã€Væ˜¯å›¾åƒä¸­çš„ç»è¿‡åç½®å¤„ç†çš„è‰²åº¦åˆ†é‡
+					// åœ¨åç½®å¤„ç†å‰ï¼Œå®ƒçš„å–å€¼èŒƒå›´æ˜¯-128-127ï¼Œè¿™æ—¶ï¼ŒæŠŠUå’ŒVæ•°æ®ä¿®æ”¹ä¸º0ä»£è¡¨æ— è‰²
+					// åœ¨åç½®å¤„ç†åï¼Œå®ƒçš„å–å€¼èŒƒå›´å˜æˆäº†0-255ï¼Œæ‰€ä»¥è¿™æ—¶å€™éœ€è¦å–ä¸­é—´å€¼ï¼Œå³128
 					memset(pFrameYUV->data[0] + pixel_w * pixel_h, 128, pixel_w * pixel_h / 2);
 					//memset(pFrameYUV->data[0] + pFrameYUV->width * pFrameYUV->height, 128, pFrameYUV->width * pFrameYUV->height / 2);
 				}
-				// ÉèÖÃÎÆÀíµÄÊı¾İ
+				// è®¾ç½®çº¹ç†çš„æ•°æ®
 				SDL_UpdateTexture(sdlTexture, NULL, pFrameYUV->data[0], pFrameYUV->linesize[0]);
 				// FIX: If window is resize
 				sdlRect.x = 0;
@@ -319,11 +319,11 @@ int main(int argc, char* argv[])
 				sdlRect.w = screen_w;
 				sdlRect.h = screen_h;
 
-				// Ê¹ÓÃÍ¼ĞÎÑÕÉ«Çå³ıµ±Ç°µÄäÖÈ¾Ä¿±ê
+				// ä½¿ç”¨å›¾å½¢é¢œè‰²æ¸…é™¤å½“å‰çš„æ¸²æŸ“ç›®æ ‡
 				SDL_RenderClear(sdlRenderer);
-				// ½«ÎÆÀíµÄÊı¾İ¿½±´¸øäÖÈ¾Æ÷
+				// å°†çº¹ç†çš„æ•°æ®æ‹·è´ç»™æ¸²æŸ“å™¨
 				SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, &sdlRect);
-				// ÏÔÊ¾ÎÆÀíµÄÊı¾İ
+				// æ˜¾ç¤ºçº¹ç†çš„æ•°æ®
 				SDL_RenderPresent(sdlRenderer);
 
 				frame_cnt++;
@@ -332,26 +332,26 @@ int main(int argc, char* argv[])
 		}
 		else if (event.type == SDL_KEYDOWN)
 		{
-			// ¸ù¾İ°´ÏÂ¼üÅÌ¼üÎ»¾ö¶¨ÊÂ¼ş
+			// æ ¹æ®æŒ‰ä¸‹é”®ç›˜é”®ä½å†³å®šäº‹ä»¶
 			switch (event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
-				thread_exit = 1;// °´ÏÂESC¼ü£¬Ö±½ÓÍË³ö²¥·ÅÆ÷
+				thread_exit = 1;// æŒ‰ä¸‹ESCé”®ï¼Œç›´æ¥é€€å‡ºæ’­æ”¾å™¨
 				break;
 			case SDLK_SPACE:
-				thread_pause = !thread_pause;// °´ÏÂSpace¼ü£¬¿ØÖÆÊÓÆµ²¥·ÅÔİÍ£
+				thread_pause = !thread_pause;// æŒ‰ä¸‹Spaceé”®ï¼Œæ§åˆ¶è§†é¢‘æ’­æ”¾æš‚åœ
 				break;
 			case SDLK_F1:
-				delay_time += 10;// °´ÏÂF1£¬ÊÓÆµ¼õËÙ
+				delay_time += 10;// æŒ‰ä¸‹F1ï¼Œè§†é¢‘å‡é€Ÿ
 				break;
 			case SDLK_F2:
 				if (delay_time > 10)
 				{
-					delay_time -= 10;// °´ÏÂF2£¬ÊÓÆµ¼ÓËÙ
+					delay_time -= 10;// æŒ‰ä¸‹F2ï¼Œè§†é¢‘åŠ é€Ÿ
 				}
 				break;
 			case SDLK_LSHIFT:
-				video_gray = !video_gray;// °´ÏÂ×óShift¼ü£¬ÇĞ»»ÏÔÊ¾²ÊÉ«/ºÚ°×Í¼Ïñ
+				video_gray = !video_gray;// æŒ‰ä¸‹å·¦Shifté”®ï¼Œåˆ‡æ¢æ˜¾ç¤ºå½©è‰²/é»‘ç™½å›¾åƒ
 				break;
 			default:
 				break;
@@ -372,16 +372,16 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	// ¹Ø±ÕÎÄ¼ş
+	// å…³é—­æ–‡ä»¶
 	fclose(fp_txt);
 
-	// ÊÍ·ÅFFmpegÏà¹Ø×ÊÔ´
+	// é‡Šæ”¾FFmpegç›¸å…³èµ„æº
 	sws_freeContext(img_convert_ctx);
-	// ÊÍ·ÅSDL×ÊÔ´
+	// é‡Šæ”¾SDLèµ„æº
 	SDL_DestroyTexture(sdlTexture);
 	SDL_DestroyRenderer(sdlRenderer);
 	SDL_DestroyWindow(screen);
-	// ÍË³öSDLÏµÍ³
+	// é€€å‡ºSDLç³»ç»Ÿ
 	SDL_Quit();
 
 	av_frame_free(&pFrameYUV);
