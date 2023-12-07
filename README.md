@@ -1,4 +1,4 @@
-# Simplest-FFmpeg-Player
+# Simplest-FFmpeg-Video-Player
 最简单的基于FFmpeg的视频播放器。
 
 本程序实现了视频文件的解码和显示（支持HEVC，H.264，MPEG2等），本版本中使用SDL消息机制刷新视频画面。
